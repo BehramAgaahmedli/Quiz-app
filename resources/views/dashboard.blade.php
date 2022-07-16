@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
        
-      Ana Səhifə
+      İstifadəçi paneli
        
     </x-slot>
 

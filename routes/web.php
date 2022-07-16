@@ -29,8 +29,5 @@ Route::middleware([
 
 Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','isAdmin']],function(){
 
-    Route::get('/deneme', function(){
-        return 'hello';
-    });
-
+    Route::get('/', [App\Http\Controllers\admin\indexController::class,'index']);
 });

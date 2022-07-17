@@ -30,4 +30,36 @@ Route::middleware([
 Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','isAdmin']],function(){
 
     Route::get('/', [App\Http\Controllers\admin\indexController::class,'index']);
+
+
+
+    Route::group(['namespace'=>'ustimtahanlar','prefix'=>'ustimtahanlar','as'=>'ustimtahanlar.'],function (){
+        Route::get('/',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'index'])->name('index');
+       
+        Route::get('/ekle',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'create'])->name('create');
+        Route::post('/ekle',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'store'])->name('create.post');
+        Route::get('/duzenle/{id}',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'edit'])->name('edit');
+        Route::post('/duzenle/{id}',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'update'])->name('edit.post');
+        Route::get('/sil/{id}',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'delete'])->name('delete');
+    });
+    
+
+
+    Route::group(['namespace'=>'altimtahanlar','prefix'=>'altimtahanlar','as'=>'altimtahanlar.'],function (){
+        Route::get('/',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'index'])->name('index');
+       
+        Route::get('/ekle',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'create'])->name('create');
+        Route::post('/ekle',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'store'])->name('create.post');
+        Route::get('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'edit'])->name('edit');
+        Route::post('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'update'])->name('edit.post');
+        Route::get('/sil/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'delete'])->name('delete');
+    });
+
+
+
+
+
+
+
+
 });

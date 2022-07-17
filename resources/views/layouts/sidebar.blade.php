@@ -14,15 +14,15 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{{route('admin.ustimtahanlar.index')}}">
                 
-                <p>Yayın Evi</p>
+                <p>Üst İmtahanlar</p>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{{route('admin.altimtahanlar.index')}}">
                    
-                    <p>Yazarlar</p>
+                    <p>Alt İmtahanlar</p>
                 </a>
             </li>
             <li>

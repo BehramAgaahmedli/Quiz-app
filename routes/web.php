@@ -53,10 +53,10 @@ Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'
         Route::get('/sil/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'delete'])->name('delete');
     });
 
-    Route::group(['namespace'=>'admin','prefix'=>'QuizController','as'=>'QuizController.'],function (){
+    Route::group(['namespace'=>'admin','prefix'=>'quiz','as'=>'quiz.'],function (){
         Route::get('/',[App\Http\Controllers\admin\QuizController::class, 'index'])->name('index');
-        //Route::get('/ekle',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'create'])->name('create');
-        //Route::post('/ekle',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'store'])->name('create.post');
+        Route::get('/ekle',[App\Http\Controllers\admin\QuizController::class, 'create'])->name('create');
+        Route::post('/ekle',[App\Http\Controllers\admin\QuizController::class, 'store'])->name('create.post');
         //Route::get('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'edit'])->name('edit');
         //Route::post('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'update'])->name('edit.post');
         //Route::get('/sil/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'delete'])->name('delete');

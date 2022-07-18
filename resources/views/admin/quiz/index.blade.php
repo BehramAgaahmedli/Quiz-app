@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{route('admin.ustimtahanlar.create')}}" class="btn btn-success">Quiz Əlavə Et</a>
+                    <a href="{{route('admin.quiz.create')}}" class="btn btn-success">Quiz Əlavə Et</a>
                     <div class="card">
                         <div class="card-header" data-background-color="purple">
                             <h4 class="title">Quizlər</h4>

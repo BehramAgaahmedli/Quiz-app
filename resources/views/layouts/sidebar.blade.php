@@ -26,8 +26,8 @@
                 </a>
             </li>
             <li>
-                <a href="">
-                <p>Kategorilər</p>
+                <a href="{{route('admin.QuizController.index')}}">
+                <p>Quizlər</p>
                    
                 </a>
             </li>

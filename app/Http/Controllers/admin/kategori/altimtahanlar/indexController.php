@@ -17,7 +17,7 @@ class indexController extends Controller
     }
 
     public function create()
-    {$data = Ustimtahanlar::all();
+    {      $data = Ustimtahanlar::all();
         return view('admin.altimtahanlar.create',['data'=>$data]);
     }
 

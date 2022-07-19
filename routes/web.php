@@ -57,9 +57,9 @@ Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'
         Route::get('/',[App\Http\Controllers\admin\QuizController::class, 'index'])->name('index');
         Route::get('/ekle',[App\Http\Controllers\admin\QuizController::class, 'create'])->name('create');
         Route::post('/ekle',[App\Http\Controllers\admin\QuizController::class, 'store'])->name('create.post');
-        //Route::get('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'edit'])->name('edit');
-        //Route::post('/duzenle/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'update'])->name('edit.post');
-        //Route::get('/sil/{id}',[App\Http\Controllers\admin\kategori\altimtahanlar\indexController::class, 'delete'])->name('delete');
+        Route::get('/duzenle/{id}',[App\Http\Controllers\admin\QuizController::class, 'edit'])->name('edit');
+        Route::post('/duzenle/{id}',[App\Http\Controllers\admin\QuizController::class, 'update'])->name('edit.post');
+        Route::get('/sil/{id}',[App\Http\Controllers\admin\QuizController::class, 'delete'])->name('delete');
     });
 
 

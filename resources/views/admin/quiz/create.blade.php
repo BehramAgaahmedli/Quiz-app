@@ -5,8 +5,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-
-                    @if($errors->any())
+                
+                @if($errors->any())
                     <div class="alert alert-primary" role="alert">
                     @foreach($errors->all() as $error)
                        

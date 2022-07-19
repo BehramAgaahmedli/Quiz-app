@@ -39,8 +39,8 @@
                                         <td>{{$value['views']}}</td>
                                         <td>{{$value['created_at']}}</td>
                                         <td>{{$value['updated_at']}}</td>
-                                        <td><a href="{{route('admin.ustimtahanlar.edit',['id'=>$value['id']])}}">Düzənlə</a></td>
-                                        <td><a href="{{route('admin.ustimtahanlar.delete',['id'=>$value['id']])}}">Sil</a></td>
+                                        <td><a href="{{route('admin.quiz.edit',['id'=>$value['id']])}}">Düzənlə</a></td>
+                                        <td><a href="{{route('admin.quiz.delete',['id'=>$value['id']])}}">Sil</a></td>
                                     </tr>
                                 @endforeach
 

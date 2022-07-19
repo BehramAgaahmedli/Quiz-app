@@ -16,14 +16,14 @@
                                 <tr>
                                     <th>Ad</th>
                                     <th>Açıqlama</th>
-                                    <th>Bitiş tarixi</th>
                                     <th>status</th>
                                     <th>qiymət</th>
                                     <th>son qiymət</th>
                                     <th>Vaxt</th>
                                     <th>giriş</th>
-                                    <th>Tarix</th>
+                                    <th>Yerləşmə Tarixi</th>
                                     <th>Güncəlləmə Tarixi</th>
+                                    <th>Bitiş tarixi</th>
                                     <th>Düzənlə</th>
                                     <th>Sil</th>
                                 </tr>
@@ -32,8 +32,7 @@
                                 @foreach($data  as $key => $value)
                                     <tr>
                                         <td>{{$value['title']}}</td>
-                                        <td>{{$value['description']}}</td>
-                                        <td>{{$value['finished_at']}}</td>
+                                        <td>{{$value['description']}}</td>                                      
                                         <td>{{$value['status']}}</td>
                                         <td>{{$value['price']}} Azn</td>
                                         <td>{{$value['final_price']}} Azn</td>
@@ -41,6 +40,7 @@
                                         <td>{{$value['views']}}</td>
                                         <td>{{$value['created_at']}}</td>
                                         <td>{{$value['updated_at']}}</td>
+                                        <td>{{$value['finished_at']}}</td>
                                         <td><a href="{{route('admin.quiz.edit',['id'=>$value['id']])}}">Düzənlə</a></td>
                                         <td><a href="{{route('admin.quiz.delete',['id'=>$value['id']])}}">Sil</a></td>
                                     </tr>

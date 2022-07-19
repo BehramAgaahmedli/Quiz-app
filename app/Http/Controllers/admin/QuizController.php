@@ -50,7 +50,7 @@ class QuizController extends Controller
 
     public function edit($id)
     {
-        $c = Quiz::where('id','=',$id)->count();
+        $c = Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->count();
         if($c!=0)
         {
             $data = Quiz::where('id','=',$id)->get();
@@ -103,9 +103,25 @@ class QuizController extends Controller
 
 
 
-    public function delete()
+    public function delete($id)
     {
        
+        $c = Quiz::where('id','=',$id)->count();
+        if($c!=0)
+        {
+            
+           
+            Quiz::where('id','=',$id)->delete();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect('/');
+        }
+    
+
+
+
     } 
 
    

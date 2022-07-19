@@ -20,6 +20,7 @@
                                     <th>status</th>
                                     <th>qiymət</th>
                                     <th>son qiymət</th>
+                                    <th>Vaxt</th>
                                     <th>giriş</th>
                                     <th>Tarix</th>
                                     <th>Güncəlləmə Tarixi</th>
@@ -36,6 +37,7 @@
                                         <td>{{$value['status']}}</td>
                                         <td>{{$value['price']}} Azn</td>
                                         <td>{{$value['final_price']}} Azn</td>
+                                        <td>{{$value['time']}}</td>
                                         <td>{{$value['views']}}</td>
                                         <td>{{$value['created_at']}}</td>
                                         <td>{{$value['updated_at']}}</td>

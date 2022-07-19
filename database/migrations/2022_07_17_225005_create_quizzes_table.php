@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('views');
             $table->integer('ustimtahan_id');
             $table->integer('altimtahan_id');
+            $table->integer('time')->nullable();
             $table->timestamps();
         });
     }

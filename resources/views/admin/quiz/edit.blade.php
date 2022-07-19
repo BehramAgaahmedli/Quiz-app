@@ -80,7 +80,10 @@
                                             <input type="text" name="final_price" class="form-control" value="{{$data[0]['final_price']}}">
                                             <span class="material-input"></span></div>
 
-                                          
+                                            <div class="form-group label-floating is-empty">
+                                            <label>Quiz Vaxtı (Dəqiqə Yazın)</label>
+                                            <input type="text" name="time" class="form-control" value="{{$data[0]['time']}}">
+                                            <span class="material-input"></span></div>
 
 
                                             <div  class="form-group label-floating is-empty">

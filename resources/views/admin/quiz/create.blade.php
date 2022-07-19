@@ -71,6 +71,11 @@
                                             <span class="material-input"></span></div>
 
                                             <div class="form-group label-floating is-empty">
+                                            <label>Quiz Vaxtı (Dəqiqə Yazın)</label>
+                                            <input type="text" name="time" class="form-control" >
+                                            <span class="material-input"></span></div>
+
+                                            <div class="form-group label-floating is-empty">
                                           <input type="hidden" name="teacher_id" class="form-control" value="{{auth()->user()->id}}">
                                             <span class="material-input"></span></div>
 

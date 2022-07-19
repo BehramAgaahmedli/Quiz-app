@@ -31,6 +31,7 @@ class QuizController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
         ]);
         $all = $request->except('_token');
@@ -69,6 +70,7 @@ class QuizController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
         ]);
 

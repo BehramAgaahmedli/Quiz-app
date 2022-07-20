@@ -15,6 +15,8 @@
                                 <thead class="text-primary">
                                 <tr>
                                     <th>ad</th>
+                                    <th>Yerləşmə Tarixi</th>
+                                    <th>Güncəlləmə Tarixi</th>
                                     <th>Düzənlə</th>
                                     <th>Sil</th>
                                 </tr>
@@ -23,6 +25,20 @@
                                 @foreach($data  as $key => $value)
                                     <tr>
                                         <td>{{$value['name']}}</td>
+                                        <td>
+                                           @if($value['created_at'])
+                                        <span title="{{$value['created_at']}}">{{$value['created_at']->diffForHumans()}}</span>
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        <td>
+                                        @if($value['updated_at'])
+                                        <span title="{{$value['created_at']}}">{{$value['created_at']->diffForHumans()}}</span>
+                                            @else
+                                            -
+                                            @endif
+                                        </td>      
                                         <td><a href="{{route('admin.altimtahanlar.edit',['id'=>$value['id']])}}">Düzənlə</a></td>
                                         <td><a href="{{route('admin.altimtahanlar.delete',['id'=>$value['id']])}}">Sil</a></td>
                                     </tr>

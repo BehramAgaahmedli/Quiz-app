@@ -26,7 +26,7 @@ return new class extends Migration
             $table->longText('answer4');
             $table->longText('answer5');         
             $table->enum('correct_answer',['answer1','answer2','answer3','answer4','answer5']);
-            $table->enum('Subject',['1','2','3']);
+            $table->enum('subject',['1','2','3']);
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->timestamps();
         });

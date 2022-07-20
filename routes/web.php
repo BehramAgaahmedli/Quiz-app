@@ -65,9 +65,9 @@ Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'
         Route::get('/{id}',[App\Http\Controllers\admin\QuestionController::class, 'index'])->name('index');
         Route::get('/ekle/{id}',[App\Http\Controllers\admin\QuestionController::class, 'create'])->name('create');
         Route::post('/ekle',[App\Http\Controllers\admin\QuestionController::class, 'store'])->name('create.post');
-        Route::get('/duzenle/{id}',[App\Http\Controllers\admin\QuestionController::class, 'edit'])->name('edit');
+        Route::get('/duzenle/{quiz_id}/{id}',[App\Http\Controllers\admin\QuestionController::class, 'edit'])->name('edit');
         Route::post('/duzenle/{id}',[App\Http\Controllers\admin\QuestionController::class, 'update'])->name('edit.post');
-        Route::get('/sil/{id}',[App\Http\Controllers\admin\QuestionController::class, 'delete'])->name('delete');
+        Route::get('/sil/{quiz_id}/{id}',[App\Http\Controllers\admin\QuestionController::class, 'delete'])->name('delete');
 
     });
 

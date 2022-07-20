@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
+    protected $dates=['finished_at'];
     use HasFactory;
     protected $guarded =[];
 

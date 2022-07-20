@@ -33,7 +33,7 @@
                                     <div class="col-md-12">
                                     <div class="form-group label-floating is-empty">
                                             <label>Bölüm</label>
-                                            <select name="Subject" class="form-control" id="">
+                                            <select name="subject" class="form-control" id="">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>   

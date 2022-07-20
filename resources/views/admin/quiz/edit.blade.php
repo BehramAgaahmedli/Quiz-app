@@ -47,7 +47,17 @@
                                             <textarea name="description"  class="form-control" rows="10">{{ $data[0]['description'] }}</textarea>
                                             <span class="material-input"></span></div>
 
-
+                                            <div class="form-group label-floating is-empty">
+                                            <label>Status</label>
+                                            <select name="status" class="form-control" id="">
+                                            @foreach($data as $key => $value)
+                                           
+                                                    <option @if($value['status'] == 'publish' ) selected @endif value="publish">Aktif</option>
+                                                    <option @if($value['status'] == 'passive'  ) selected @endif value="passive">Passif</option>
+                                                    <option @if($value['status'] == 'draft') selected @endif value="draft">Taslak</option>
+                                                @endforeach
+                                               
+                                            </select>
 
                                             <div class="form-group label-floating is-empty">
                                             <label>Üst kategoriya</label>
@@ -85,6 +95,10 @@
                                             <input type="text" name="time" class="form-control" value="{{$data[0]['time']}}">
                                             <span class="material-input"></span></div>
 
+                                            <div class="form-group label-floating is-empty">
+                                            <label>Rasgele Sual sayı</label>
+                                            <input type="text" name="random_number" class="form-control" value="{{$data[0]['random_number']}}">
+                                            <span class="material-input"></span></div>
 
                                             <div  class="form-group label-floating is-empty">
                                             <input  id="isFinished" @if( $data[0]['finished_at']  ) checked @endif type="checkbox">

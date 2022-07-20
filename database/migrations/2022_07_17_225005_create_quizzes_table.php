@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('teacher_id');
             $table->decimal('price');
             $table->decimal('final_price');
+            $table->integer('random_number');
             $table->integer('views');
             $table->integer('ustimtahan_id');
             $table->integer('altimtahan_id');

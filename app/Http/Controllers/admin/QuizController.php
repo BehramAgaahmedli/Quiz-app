@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
+
 use App\Models\Ustimtahanlar;
 use App\Models\Altimtahanlar;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -13,8 +14,22 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $data = Quiz::where('teacher_id',auth()->user()->id)->paginate(10);
-        return view('admin.quiz.index',['data'=>$data]);
+
+        $data = Quiz::where('teacher_id',auth()->user()->id);
+     if(request()->get('title')){
+
+        $data=$data->where('title','LIKE',"%".request()->get('title')."%");
+     }
+
+     if(request()->get('status')){
+
+        $data=$data->where('status',request()->get('status'));
+    }
+          $data=$data->paginate(10);
+        //$data = Quiz::where('teacher_id',auth()->user()->id)->paginate(10);
+        $data1 = Quiz::where('teacher_id',auth()->user()->id)->get();
+        $countdata=count($data1);
+        return view('admin.quiz.index',['data'=>$data,'countdata'=>$countdata]);
     }
 
     public function create()
@@ -56,11 +71,12 @@ class QuizController extends Controller
             $data = Quiz::where('id','=',$id)->get();
             $Ustimtahanlar = Ustimtahanlar::all();
         $Altimtahanlar = Altimtahanlar::all();
+       
             return view('admin.quiz.edit',['data'=>$data,'Ustimtahanlar'=>$Ustimtahanlar,'Altimtahanlar'=>$Altimtahanlar]);
         }
         else
         {
-            return redirect('/');
+            return redirect('/dashboard');
         }
     }
 
@@ -93,7 +109,7 @@ class QuizController extends Controller
         }
         else
         {
-            return redirect('/');
+            return redirect('/dashboard');
         }
 
 
@@ -111,12 +127,12 @@ class QuizController extends Controller
         {
             
            
-            Quiz::where('id','=',$id)->delete();
+            Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->delete();
             return redirect()->back();
         }
         else
         {
-            return redirect('/');
+            return redirect('/dashboard');
         }
     
 

@@ -23,10 +23,29 @@ class indexController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            
+             'image' => 'nullable|mimes:jpg,png,img',
+             
+        ]);
 
         $all = $request->except('_token');
         $all['selflink'] = mHelper::permalink($all['name']);
-        $all['image'] = imageUpload::singleUpload(rand(1,19000),"imtahanlar",$request->file('image'));
+
+       // $all['image'] = imageUpload::singleUpload(rand(1,19000),"imtahanlar",$request->file('image'));
+
+        if($request->hasFile('image')){
+            $ext = $request->image->extension();
+            
+           
+            $fileName=rand(1,100).time().'.'.$ext;
+           
+    $fileNameWithUpload='storage/Altkategoryimage/'.$fileName;
+    
+    $request->image->storeAs('public/Altkategoryimage',$fileName);
+    $all['image']=$fileNameWithUpload;
+    
+    }
         $insert = Altimtahanlar::create($all);
         if($insert)
         {
@@ -61,10 +80,37 @@ class indexController extends Controller
         $c = Altimtahanlar::where('id','=',$id)->count();
         if($c!=0)
         {
+            $validated = $request->validate([
+            
+                'image' => 'nullable|mimes:jpg,png,img',
+                
+           ]);
             $data = Altimtahanlar::where('id','=',$id)->get();
             $all = $request->except('_token');
             $all['selflink'] = mHelper::permalink($all['name']);
-            $all['image'] = imageUpload::singleUploadUpdate(rand(1,9000),"imtahanlar",$request->file('image'),$data,"image");
+
+
+
+            if($request->hasFile('image')){
+
+                $ext = $request->image->extension();
+                
+               
+                $fileName=rand(1,100).time().'.'.$ext;
+               
+        $fileNameWithUpload='storage/Altkategoryimage/'.$fileName;
+        
+        $request->image->storeAs('public/Altkategoryimage',$fileName);
+        $all['image']=$fileNameWithUpload;
+        
+            File::delete( $data[0]['image']);
+            
+        }
+
+
+
+
+           // $all['image'] = imageUpload::singleUploadUpdate(rand(1,9000),"imtahanlar",$request->file('image'),$data,"image");
             $update = Altimtahanlar::where('id','=',$id)->update($all);
          
             if($update)

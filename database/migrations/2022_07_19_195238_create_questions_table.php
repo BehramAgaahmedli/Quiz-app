@@ -17,19 +17,18 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('quiz_id');
             $table->longText('question');
-            $table->longText('file')->nullable();          
+            $table->longText('image')->nullable();    
+            $table->longText('video')->nullable();  
+            $table->longText('audio')->nullable();      
             $table->longText('answer1');
             $table->longText('answer2');
             $table->longText('answer3');
             $table->longText('answer4');
-            $table->longText('answer5');
+            $table->longText('answer5');         
             $table->enum('correct_answer',['answer1','answer2','answer3','answer4','answer5']);
             $table->enum('Subject',['1','2','3']);
-            $table->timestamps();
-            //$table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
-          
-
+            $table->timestamps();
         });
     }
 

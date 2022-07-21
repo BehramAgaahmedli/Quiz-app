@@ -25,8 +25,7 @@ class QuizController extends Controller
 
         $data=$data->where('status',request()->get('status'));
     }
-          $data=$data->paginate(10);
-        //$data = Quiz::where('teacher_id',auth()->user()->id)->paginate(10);
+          $data=$data->paginate(10);        
         $data1 = Quiz::where('teacher_id',auth()->user()->id)->get();
         $countdata=count($data1);
         return view('admin.quiz.index',['data'=>$data,'countdata'=>$countdata]);
@@ -44,8 +43,8 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required',   
+            'random_number1' => 'required',       
             'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
         ]);
@@ -85,7 +84,7 @@ class QuizController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'random_number1' => 'required',
             'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
         ]);

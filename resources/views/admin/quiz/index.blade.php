@@ -43,7 +43,12 @@
                                     <th>qiymət</th>
                                     <th>son qiymət</th>
                                     <th>Vaxt</th>
-                                    <th>Rasgele sual</th>
+                                    <th>Fənn1</th>
+                                    <th>sual sayı1</th>
+                                    <th>Fənn2</th>
+                                    <th>sual sayı2</th>
+                                    <th>Fənn3</th>
+                                    <th>sual sayı3</th>
                                     <th>giriş</th>
                                     <th>Yerləşmə Tarixi</th>
                                     <th>Güncəlləmə Tarixi</th>
@@ -77,7 +82,45 @@
                                         <td>{{$value['price']}} Azn</td>
                                         <td>{{$value['final_price']}} Azn</td>
                                         <td>{{$value['time']}}</td>
-                                        <td>{{$value['random_number']}}</td>
+
+                                        <td>@if($value['subject1'])
+                                            {{$value['subject1']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        <td>@if($value['random_number1'])
+                                            {{$value['random_number1']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+
+                                        <td>@if($value['subject2'])
+                                            {{$value['subject2']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        <td>@if($value['random_number2'])
+                                            {{$value['random_number2']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+
+                                        <td>@if($value['subject3'])
+                                            {{$value['subject3']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        <td>@if($value['random_number3'])
+                                            {{$value['random_number3']}}
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
                                         <td>{{$value['views']}}</td>
                                         <td>@if($value['created_at'])
                                         <span title="{{$value['created_at']}}">{{$value['created_at']->diffForHumans()}}</span>

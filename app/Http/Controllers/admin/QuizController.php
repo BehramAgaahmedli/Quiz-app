@@ -43,7 +43,8 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',   
+            'title' => 'required',
+            'final_price' => 'required',    
             'random_number1' => 'required',       
             'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),

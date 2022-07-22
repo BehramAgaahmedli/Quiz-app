@@ -30,7 +30,8 @@ Route::middleware([
 Route::group(['middleware'=>'auth'],function(){
 
 Route::get('/dashboard',[App\Http\Controllers\MainController::class, 'dashboard'])->name('dashboard');
-Route::get('/quiz{slug}',[App\Http\Controllers\MainController::class, 'quiz_detail'])->name('quiz.detail');
+Route::get('/quiz/detay/{slug}',[App\Http\Controllers\MainController::class, 'quiz_detail'])->name('quiz.detail');
+Route::get('/quiz/{id}/{slug}',[App\Http\Controllers\MainController::class, 'quiz'])->name('quiz.join');
 
 });
 Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','isAdmin']],function(){

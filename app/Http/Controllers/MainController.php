@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quiz;
-use App\Models\Questions;
+use App\Models\Question;
 class MainController extends Controller
 {
     public function dashboard()
     {
-        $quizzes = Quiz::where('status','publish')->paginate(4); 
+        $quizzes = Quiz::where('status','publish')->where('final_price','0.00')->paginate(4); 
 
         return view('dashboard',['quizzes'=>$quizzes]);
     }
@@ -19,7 +19,7 @@ class MainController extends Controller
 
         if($c!=0)     
          {
-        $quiz = Quiz::where('slug',$slug)->first();
+        $quiz = Quiz::where('slug',$slug)->get();
        
            return view('quiz_detail',['quiz'=>$quiz]);
          }
@@ -30,10 +30,22 @@ class MainController extends Controller
           
     }
 
-    public function store(Request $request)
+    public function quiz($id,$slug)
     {
-      
+        $c = Quiz::where('id','=',$id)->where('slug',$slug)->where('final_price','0.00')->count();
 
+        if($c!=0)     
+         {
+      
+            $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->where('final_price','0.00')->get();
+            $questions=Question::where('quiz_id',$id)->get();
+       
+           return view('quiz',['quiz'=>$quiz,'questions'=>$questions]);
+         }
+          else
+          {
+              return redirect('/dashboard');
+          }
 
     }
 

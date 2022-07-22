@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
   
-      {{$quiz['title']}}
+      {{$quiz[0]['title']}}
   
     </x-slot>
     
@@ -16,11 +16,11 @@
         <div class="col-md-4">
 
         <ul class="list-group">
-            @if($quiz['finished_at'])
+            @if($quiz[0]['finished_at'])
      <li class="list-group-item d-flex justify-content-between align-items-center">
     Son Qatılım Tarixi 
    
-    <span title="{{$quiz['finished_at']}}" class="badge bg-secondary rounded-pill">{{$quiz['finished_at']->diffForHumans()}}</span>
+    <span title="{{$quiz[0]['finished_at']}}" class="badge bg-secondary rounded-pill">{{$quiz[0]['finished_at']->diffForHumans()}}</span>
   </li>
   @endif
   <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -43,8 +43,8 @@
        </div>
        <div class="col-md-8">
 
-       {{$quiz['description']}}</p><br>
-    <a href="#" class="btn btn-primary btn-block btn-sm form-control">Quizə Qatıl</a>
+       {{$quiz[0]['description']}}</p><br>
+    <a href="{{ route('quiz.join',['id'=>$quiz[0]['id'],'slug'=>$quiz[0]['slug'] ]) }}" class="btn btn-primary  btn-sm form-control">Quizə Qatıl</a>
 
        </div>
         </div>

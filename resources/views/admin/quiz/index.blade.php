@@ -79,8 +79,18 @@
                                             @break
                                             @endswitch
                                         </td>
-                                        <td>{{$value['price']}} Azn</td>
-                                        <td>{{$value['final_price']}} Azn</td>
+                                        <td>@if($value['price'])
+                                            {{$value['price']}} Azn
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                        <td>@if($value['final_price'])
+                                            {{$value['final_price']}} Azn
+                                            @else
+                                           -
+                                            @endif
+                                        </td>
                                         <td>{{$value['time']}}</td>
 
                                         <td>@if($value['subject1'])
@@ -148,7 +158,7 @@
 
                                 </tbody>
                             </table>
-                            {{$data->withQueryString()->links()}}
+                            {{ $data->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

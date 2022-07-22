@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,7 +26,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+*/
+Route::group(['middleware'=>'auth'],function(){
 
+Route::get('/dashboard',[App\Http\Controllers\MainController::class, 'dashboard'])->name('dashboard');
+Route::get('/quiz{slug}',[App\Http\Controllers\MainController::class, 'quiz_detail'])->name('quiz.detail');
+
+});
 Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','isAdmin']],function(){
 
     Route::get('/', [App\Http\Controllers\admin\indexController::class,'index']);

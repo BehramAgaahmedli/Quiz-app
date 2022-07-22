@@ -80,7 +80,7 @@ class QuizController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $validated = $request->validate([
             'title' => 'required',
@@ -89,14 +89,15 @@ class QuizController extends Controller
             'finished_at' => 'nullable|after:'.now(),
         ]);
 
-        $id = $request->route('id');
+       // $id = $request->route('id');
         $c = Quiz::where('id','=',$id)->count();
         if($c!=0)
         {
            
             $all = $request->except('_token');
            
-            $update = Quiz::where('id','=',$id)->update($all);
+            $update= Quiz::where('id','=',$id)->update($all);
+          
             if($update)
             {
                 return redirect()->back()->with('status','Quiz Başarı ile Düzenlendi');
@@ -105,7 +106,8 @@ class QuizController extends Controller
             {
                 return redirect()->back()->with('status','Quiz Düzenlenemedi');
             }
-        }
+       
+            }
         else
         {
             return redirect('/dashboard');

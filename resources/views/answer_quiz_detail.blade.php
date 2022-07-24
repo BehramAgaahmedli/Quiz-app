@@ -37,15 +37,50 @@
     <span  class="badge bg-primary rounded-pill">{{ $quiz->my_result->points }}</span>
   </li>
  
+   @if( $quiz->my_result->correct1 || $quiz->my_result->wrong1 )
   <li class="list-group-item d-flex justify-content-between align-items-center">
-     Doğru sayısı / Yanlış sayısı
-
+  @if( $quiz['subject1'] )
+  {{ $quiz['subject1'] }}
+  @else
+  Doğru / Yanlış
+  @endif 
    <div class="float-right">
-   <span  class="badge bg-success rounded-pill">{{ $quiz->my_result->correct }} Doğru </span>
-   <span  class="badge bg-danger rounded-pill">{{ $quiz->my_result->wrong }} Yanlış</span>
+   <span  class="badge bg-success rounded-pill">{{ $quiz->my_result->correct1 }} Doğru </span>
+   <span  class="badge bg-danger rounded-pill">{{ $quiz->my_result->wrong1 }} Yanlış</span>
    </div>
     
   </li>
+  @endif
+  @if( $quiz->my_result->correct2 || $quiz->my_result->wrong2 )
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  @if( $quiz['subject2'] )
+  {{ $quiz['subject2'] }}
+  @else
+  Doğru / Yanlış
+  @endif
+
+   <div class="float-right">
+   <span  class="badge bg-success rounded-pill">{{ $quiz->my_result->correct2 }} Doğru </span>
+   <span  class="badge bg-danger rounded-pill">{{ $quiz->my_result->wrong2 }} Yanlış</span>
+   </div>
+    
+  </li>
+  @endif
+  @if( $quiz->my_result->correct3 || $quiz->my_result->wrong3 )
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  @if( $quiz['subject3'] )
+  {{ $quiz['subject3'] }}
+  @else
+  Doğru / Yanlış
+  @endif
+
+   <div class="float-right">
+   <span  class="badge bg-success rounded-pill">{{ $quiz->my_result->correct3 }} Doğru </span>
+   <span  class="badge bg-danger rounded-pill">{{ $quiz->my_result->wrong3 }} Yanlış</span>
+   </div>
+    
+  </li>
+  @endif
   @endif
             @if($quiz['finished_at'])
      <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -54,11 +89,27 @@
     <span title="{{$quiz['finished_at']}}" class="badge bg-secondary rounded-pill">{{$quiz['finished_at']->diffForHumans()}}</span>
   </li>
   @endif
+  @if($quiz['subject1'] || $quiz['random_number1'])
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Sual sayısı
    
-    <span class="badge bg-secondary rounded-pill">{{ count($quiz->questions) }}</span>
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject1'] }} ({{ $quiz['random_number1'] }})</span>
   </li>
+  @endif
+  @if($quiz['subject2'] || $quiz['random_number2'])
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Sual sayısı
+   
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject2'] }} ({{ $quiz['random_number2'] }})</span>
+  </li>
+  @endif
+  @if($quiz['subject3'] || $quiz['random_number3'])
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Sual sayısı
+   
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject3'] }} ({{ $quiz['random_number3'] }})</span>
+  </li>
+  @endif
   @if($quiz->details!== null )
   <li class="list-group-item d-flex justify-content-between align-items-center">
   Qatılım sayısı

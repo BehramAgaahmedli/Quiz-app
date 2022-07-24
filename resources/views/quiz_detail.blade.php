@@ -31,11 +31,27 @@
     <span title="{{$quiz['finished_at']}}" class="badge bg-secondary rounded-pill">{{$quiz['finished_at']->diffForHumans()}}</span>
   </li>
   @endif
+  @if($quiz['subject1'] || $quiz['random_number1'])
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Sual sayısı
    
-    <span class="badge bg-secondary rounded-pill">{{ count($quiz->questions) }}</span>
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject1'] }} ({{ $quiz['random_number1'] }})</span>
   </li>
+  @endif
+  @if($quiz['subject2'] || $quiz['random_number2'])
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Sual sayısı
+   
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject2'] }} ({{ $quiz['random_number2'] }})</span>
+  </li>
+  @endif
+  @if($quiz['subject3'] || $quiz['random_number3'])
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Sual sayısı
+   
+    <span class="badge bg-secondary rounded-pill">{{ $quiz['subject3'] }} ({{ $quiz['random_number3'] }})</span>
+  </li>
+  @endif
   @if($quiz->details!== null )
   <li class="list-group-item d-flex justify-content-between align-items-center">
   Qatılım sayısı

@@ -61,9 +61,11 @@ class MainController extends Controller
          {
       
             $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->where('final_price','0.00')->get();
-            $questions=Question::where('quiz_id',$id)->get();
+            $questions=Question::where('quiz_id',$id)->where('subject',1)->inRandomOrder()->take($quiz[0]['random_number1'])->get();
+            $questions2=Question::where('quiz_id',$id)->where('subject',2)->inRandomOrder()->take($quiz[0]['random_number2'])->get();
+            $questions3=Question::where('quiz_id',$id)->where('subject',3)->inRandomOrder()->take($quiz[0]['random_number3'])->get();
        
-           return view('quiz',['quiz'=>$quiz,'questions'=>$questions]);
+           return view('quiz',['quiz'=>$quiz,'questions'=>$questions,'questions2'=>$questions2,'questions3'=>$questions3]);
          }
           else
           {
@@ -79,14 +81,26 @@ class MainController extends Controller
 
         if($c!=0)     
          {
-      
+           
+
             $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->with('questions.my_answer')->where('final_price','0.00')->get();
-            $questions=Question::where('quiz_id',$id)->get();
+            $result=Result::where('quiz_id',$id)->orderByDesc('id')->get();
+           $answers=Answer::where('quiz_id',$id)->where('created_at',$result[0]['created_at'])->get();
+         
+        
        
-           return view('quiz_result',['quiz'=>$quiz,'questions'=>$questions]);
+            $questions1=Question::where('quiz_id',$id)->where('subject',1)->get();
+            $questions2=Question::where('quiz_id',$id)->where('subject',2)->get(); 
+            $questions3=Question::where('quiz_id',$id)->where('subject',3)->get();
+    
+
+        
+        return view('quiz_result',['quiz'=>$quiz,'questions1'=>$questions1,'questions2'=>$questions2,'questions3'=>$questions3]);
+        
          }
-          else
-          {
+          else{
+        
+          
               return redirect('/dashboard');
           }
 
@@ -110,38 +124,101 @@ class MainController extends Controller
             
           
             $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->where('final_price','0.00')->get();
-           $questions=Question::where('quiz_id',$id)->get();
-            $e=Question::where('quiz_id',$id)->count();
-           $correct=0;
-
+            $questions=Question::where('quiz_id',$id)->where('subject',1)->get();
+            $questions2=Question::where('quiz_id',$id)->where('subject',2)->get();
+            $questions3=Question::where('quiz_id',$id)->where('subject',3)->get();
+            //$e=Question::where('quiz_id',$id)->count();
+            $quiz1=Quiz::where('id','=',$id)->where('slug',$slug)->get();
+           $correct1=0;
+           $correct2=0;
+           $correct3=0;
            foreach($questions as $question):
 
             Answer::create([
-
+                
                 'user_id'=>auth()->user()->id,
+                'quiz_id'=>$id,
                 'question_id'=>$question['id'],
-                'answer'=>$request->post($question['id'])
+                'answer'=>$request->post('answer'.$question['id'])
 
             ]);
            
-            if( $question['correct_answer']===$request->post($question->id) )
+            if( $question['correct_answer']===$request->post('answer'.$question->id) )
             {
-                $correct+=1;
+                $correct1+=1;
             }
-
-
-          
+           
            endforeach;
+
+
+           foreach($questions2 as $question):
+
+            Answer::create([
+                
+                'user_id'=>auth()->user()->id,
+                'quiz_id'=>$id,
+                'question_id'=>$question['id'],
+                'answer'=>$request->post('answer'.$question['id'])
+
+            ]);
+           
+            if( $question['correct_answer']===$request->post('answer'.$question->id) )
+            {
+                $correct2+=1;
+            }
+           
+           endforeach;
+
+           foreach($questions3 as $question):
+
+            Answer::create([
+                
+                'user_id'=>auth()->user()->id,
+                'quiz_id'=>$id,
+                'question_id'=>$question['id'],
+                'answer'=>$request->post('answer'.$question['id'])
+
+            ]);
+           
+            if( $question['correct_answer']===$request->post('answer'.$question->id) )
+            {
+                $correct3+=1;
+            }
+           
+           endforeach;
+      
+           $correct= ($correct1+$correct2+$correct3);
+           /*
+           if($e[0]['random_number1']=null){
+
+            $e[0]['random_number1']=0;
+
+        }
+    elseif($e[0]['random_number2']=null){
+        $e[0]['random_number2']=0;
+    }
+    elseif($e[0]['random_number3']=null){
+        $e[0]['random_number3']=0;
+    } */
+   
+      $point=round((100 / ($quiz1[0]['random_number1']+$quiz1[0]['random_number2']+$quiz1[0]['random_number3'])  * $correct));
           
-         $point=round((100 / $e) * $correct);
-         $wrong=$e-$correct;
+         
+          $wrong1=$quiz1[0]['random_number1']-$correct1;
+         $wrong2=$quiz1[0]['random_number2']-$correct2;
+         $wrong3=$quiz1[0]['random_number3']-$correct3;
+        
           Result::create([
 
             'user_id'=>auth()->user()->id,
             'quiz_id'=>$quiz[0]['id'],
             'points'=>$point,
-            'correct'=> $correct,
-            'wrong'=>$wrong
+            'correct1'=> $correct1,
+            'wrong1'=>$wrong1,
+            'correct2'=> $correct2,
+            'wrong2'=>$wrong2,
+            'correct3'=> $correct3,
+            'wrong3'=>$wrong3
         ]);
 
       

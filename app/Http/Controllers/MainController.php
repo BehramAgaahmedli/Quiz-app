@@ -82,20 +82,16 @@ class MainController extends Controller
         if($c!=0)     
          {
            
-
-            $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->with('questions.my_answer')->where('final_price','0.00')->get();
-            $result=Result::where('quiz_id',$id)->orderByDesc('id')->get();
-           $answers=Answer::where('quiz_id',$id)->where('created_at',$result[0]['created_at'])->get();
-         
-        
-       
+            
+            $quiz= Quiz::where('id','=',$id)->where('slug',$slug)->with('my_result')->where('final_price','0.00')->first();
+           
             $questions1=Question::where('quiz_id',$id)->where('subject',1)->get();
             $questions2=Question::where('quiz_id',$id)->where('subject',2)->get(); 
             $questions3=Question::where('quiz_id',$id)->where('subject',3)->get();
     
 
         
-        return view('quiz_result',['quiz'=>$quiz,'questions1'=>$questions1,'questions2'=>$questions2,'questions3'=>$questions3]);
+        return view('quiz_result',compact('quiz'),['questions1'=>$questions1,'questions2'=>$questions2,'questions3'=>$questions3]);
         
          }
           else{
@@ -137,7 +133,6 @@ class MainController extends Controller
             Answer::create([
                 
                 'user_id'=>auth()->user()->id,
-                'quiz_id'=>$id,
                 'question_id'=>$question['id'],
                 'answer'=>$request->post('answer'.$question['id'])
 
@@ -155,8 +150,7 @@ class MainController extends Controller
 
             Answer::create([
                 
-                'user_id'=>auth()->user()->id,
-                'quiz_id'=>$id,
+                'user_id'=>auth()->user()->id,            
                 'question_id'=>$question['id'],
                 'answer'=>$request->post('answer'.$question['id'])
 
@@ -174,7 +168,6 @@ class MainController extends Controller
             Answer::create([
                 
                 'user_id'=>auth()->user()->id,
-                'quiz_id'=>$id,
                 'question_id'=>$question['id'],
                 'answer'=>$request->post('answer'.$question['id'])
 
@@ -188,20 +181,8 @@ class MainController extends Controller
            endforeach;
       
            $correct= ($correct1+$correct2+$correct3);
-           /*
-           if($e[0]['random_number1']=null){
-
-            $e[0]['random_number1']=0;
-
-        }
-    elseif($e[0]['random_number2']=null){
-        $e[0]['random_number2']=0;
-    }
-    elseif($e[0]['random_number3']=null){
-        $e[0]['random_number3']=0;
-    } */
-   
-      $point=round((100 / ($quiz1[0]['random_number1']+$quiz1[0]['random_number2']+$quiz1[0]['random_number3'])  * $correct));
+         
+      $point=round((100 / ($quiz1[0]['random_number1']+$quiz1[0]['random_number2']+$quiz1[0]['random_number3']))  * $correct);
           
          
           $wrong1=$quiz1[0]['random_number1']-$correct1;
@@ -211,7 +192,7 @@ class MainController extends Controller
           Result::create([
 
             'user_id'=>auth()->user()->id,
-            'quiz_id'=>$quiz[0]['id'],
+            'quiz_id'=>$id,
             'points'=>$point,
             'correct1'=> $correct1,
             'wrong1'=>$wrong1,

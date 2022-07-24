@@ -156,7 +156,7 @@
                                           
 
                                             <div class="form-group label-floating is-empty">
-                                          <input type="hidden" name="teacher_id" class="form-control" value="{{auth()->user()->id}}">
+                                          <input type="hidden" name="user_id" class="form-control" value="{{auth()->user()->id}}">
                                             <span class="material-input"></span></div>
 
                                             <div  class="form-group label-floating is-empty">

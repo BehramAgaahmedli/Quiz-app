@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-  
+    
       İstifadəçi paneli
-  
+     
     </x-slot>
     
     <div class="py-12">
@@ -12,8 +12,8 @@
         <div class=" col-md-8 ">
 
         <div class="list-group">
-          @foreach($quizzes as $quiz)
-  <a href="{{ route('quiz.detail',$quiz['slug']) }}" class="list-group-item list-group-item-action flex-column align-items-start ">
+          @foreach($quizzes as  $quiz)
+          <a href="{{ route('quiz.detail',['id'=>$quiz['id'],'slug'=>$quiz['slug']]) }}" class="list-group-item list-group-item-action flex-column align-items-start ">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{$quiz['title']}}</h5>
       <small>@if($quiz['finished_at']) {{$quiz['finished_at']->diffForHumans()}} sonlanır @endif</small>

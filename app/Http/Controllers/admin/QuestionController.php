@@ -13,7 +13,7 @@ class QuestionController extends Controller
 {
     public function index($id)
     {
-        $c = Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->count();
+        $c = Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->count();
        if($c!=0)
         
         {
@@ -32,7 +32,7 @@ class QuestionController extends Controller
     public function create($id)
     {
        // $id = $request->route('id');
-        $c = Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->count();
+        $c = Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->count();
         if($c!=0)
         
         {
@@ -120,10 +120,10 @@ $all['audio']=$fileNameWithUpload;
        
 
 
-        $c = Quiz::where('id','=',$quiz_id)->where('teacher_id','=',auth()->user()->id)->count();      
+        $c = Quiz::where('id','=',$quiz_id)->where('user_id','=',auth()->user()->id)->count();      
         $e=Question::where('id','=',$id)->where('quiz_id','=',$quiz_id)->count();
         if($c!=0 && $e!=0 )
-        {   $quiz= Quiz::where('id','=',$quiz_id)->where('teacher_id','=',auth()->user()->id)->get();
+        {   $quiz= Quiz::where('id','=',$quiz_id)->where('user_id','=',auth()->user()->id)->get();
             $question = Question::where('id','=',$id)->where('quiz_id','=',$quiz_id)->get();
          
             return view('admin.sual.edit',['question'=>$question,'quiz'=>$quiz]);

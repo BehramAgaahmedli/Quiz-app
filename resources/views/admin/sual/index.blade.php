@@ -43,8 +43,8 @@
                                         <td>@if($value['video'])<a href="{{asset($value['video'])}}" target="_blank">göstər </a>  @else - @endif</td>
                                         <td>@if($value['audio'])<a href="{{asset($value['audio'])}}" target="_blank">göstər </a>  @else - @endif</td>                                     
                                         <td>{{$value['answer1']}}</td>
-                                        <td>{{$value['answer2']}} Azn</td>
-                                        <td>{{$value['answer3']}} Azn</td>
+                                        <td>{{$value['answer2']}} </td>
+                                        <td>{{$value['answer3']}} </td>
                                         <td>{{$value['answer4']}}</td>
                                         <td>{{$value['answer5']}}</td>
                                         <td class="text-success">{{substr($value['correct_answer'],-1)}} . cavab</td>

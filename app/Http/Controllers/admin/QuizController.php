@@ -5,17 +5,17 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
-
+use App\Models\Question;
 use App\Models\Ustimtahanlar;
 use App\Models\Altimtahanlar;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use File;
 class QuizController extends Controller
 {
     public function index()
     {
 
-        $data = Quiz::where('teacher_id',auth()->user()->id);
+        $data = Quiz::where('user_id',auth()->user()->id);
      if(request()->get('title')){
 
         $data=$data->where('title','LIKE',"%".request()->get('title')."%");
@@ -26,7 +26,7 @@ class QuizController extends Controller
         $data=$data->where('status',request()->get('status'));
     }
           $data=$data->paginate(10);        
-        $data1 = Quiz::where('teacher_id',auth()->user()->id)->get();
+        $data1 = Quiz::where('user_id',auth()->user()->id)->get();
         $countdata=count($data1);
         return view('admin.quiz.index',['data'=>$data,'countdata'=>$countdata]);
     }
@@ -44,7 +44,7 @@ class QuizController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            'final_price' => 'required',    
+            'final_price' => 'required',
             'random_number1' => 'required',       
             'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
@@ -65,7 +65,7 @@ class QuizController extends Controller
 
     public function edit($id)
     {
-        $c = Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->count();
+        $c = Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->count();
         if($c!=0)
         {
             $data = Quiz::where('id','=',$id)->get();
@@ -85,6 +85,7 @@ class QuizController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
+            'final_price' => 'required',
             'random_number1' => 'required',
             'time' => 'required',
             'finished_at' => 'nullable|after:'.now(),
@@ -127,9 +128,17 @@ class QuizController extends Controller
         $c = Quiz::where('id','=',$id)->count();
         if($c!=0)
         {
-            
+         
            
-            Quiz::where('id','=',$id)->where('teacher_id','=',auth()->user()->id)->delete();
+            Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->delete();
+            $d=Question::where('quiz_id','=',$id)->get();
+            foreach($d as $e):
+            File::delete($e['image']);
+            File::delete($e['video']);
+            File::delete($e['audio']);
+            endforeach;
+            Question::where('quiz_id','=',$id)->delete();
+
             return redirect()->back();
         }
         else

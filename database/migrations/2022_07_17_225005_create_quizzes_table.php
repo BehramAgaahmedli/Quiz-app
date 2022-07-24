@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('slug');
             $table->timestamp('finished_at')->nullable();
             $table->enum('status',['publish','draft','passive'])->default('draft');
-            $table->integer('teacher_id');
-            $table->decimal('price')->nullable();
-            $table->decimal('final_price')->nullable();          
+            $table->integer('user_id');
+            $table->unsignedDecimal('price', $precision = 10, $scale = 2)->nullable();
+            $table->unsignedDecimal('final_price', $precision = 10, $scale = 2)->nullable();         
             $table->enum('subject1',['Azərbaycan_dili','Ədəbiyyat','Riyaziyyat','Tarix','Fizika','Biologiya','Kimya','Coğrafiya','İngilis_dili'])->nullable();
             $table->integer('random_number1')->nullable();
             $table->enum('subject2',['Azərbaycan_dili','Ədəbiyyat','Riyaziyyat','Tarix','Fizika','Biologiya','Kimya','Coğrafiya','İngilis_dili'])->nullable();
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->integer('altimtahan_id');
             $table->integer('time')->nullable();
             $table->timestamps();
+          
         });
     }
 

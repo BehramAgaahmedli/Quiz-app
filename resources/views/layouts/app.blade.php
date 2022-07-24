@@ -12,7 +12,7 @@
 
        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
-
+       <link rel="stylesheet" href="{{asset('assets/css/fontAwesome5Pro.css')}}">
         <!-- Styles -->
         @livewireStyles
 
@@ -33,8 +33,8 @@
 
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ $header }}
-                    </h2>
-
+                    
+                   </h2>
                       
                     </div>
                 </header>

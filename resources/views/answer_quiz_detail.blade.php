@@ -110,6 +110,13 @@
     <span class="badge bg-secondary rounded-pill">{{ $quiz['subject3'] }} ({{ $quiz['random_number3'] }})</span>
   </li>
   @endif
+  @if($quiz['time'])
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    İmtahan Vaxtı
+   
+    <span class="badge bg-info rounded-pill">{{ $quiz['time'] }} dəqiqə</span>
+  </li>
+  @endif
   @if($quiz->details!== null )
   <li class="list-group-item d-flex justify-content-between align-items-center">
   Qatılım sayısı
@@ -122,6 +129,28 @@
     <span class="badge bg-black rounded-pill">{{ $quiz->details['average'] }}</span>
   </li>
   @endif
+
+  @if($quiz['price'])
+  
+ 
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+Əvvəlki  qiymət <span class="badge bg-primary rounded-pill">{{$quiz['price']}} Azn </span>
+
+</li>
+@endif
+@if($quiz['final_price']==0.00)
+<li class="list-group-item d-flex justify-content-between align-items-center"> Qiyməti
+<span class="badge bg-danger rounded-pill">pulsuz</span></li>
+
+  @else 
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+  Qiyməti <span class="badge bg-success rounded-pill">{{$quiz['final_price']}} Azn</span>
+
+</li>
+@endif
+
+
+
 </ul>
       <div class="card mt-3">
       <div class="card-body">

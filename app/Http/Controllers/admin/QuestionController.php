@@ -19,6 +19,7 @@ class QuestionController extends Controller
         {
            $quiz= Quiz::where('id','=',$id)->get();
         $data =Question::where('quiz_id','=',$id)->paginate(10);
+        
         $data1=Question::where('quiz_id','=',$id)->get();
         $countdata=count($data1);
         return view('admin.sual.index',['data'=>$data,'quiz'=>$quiz,'countdata'=>$countdata]);
@@ -77,8 +78,10 @@ $all['image']=$fileNameWithUpload;
 
 }
   if($request->hasFile('video')){
+
+
     $ext = $request->video->extension();
-    
+  
    
     $fileName=rand(1,100).time().'.'.$ext;
    
@@ -231,7 +234,7 @@ $all['audio']=$fileNameWithUpload;
     {
        
        
-        $c = Quiz::where('id','=',$quiz_id)->where('teacher_id','=',auth()->user()->id)->count();
+        $c = Quiz::where('id','=',$quiz_id)->where('user_id','=',auth()->user()->id)->count();
         $f = Question::where('id','=',$id)->count();
         if($c!=0 && $f!=0)
         {

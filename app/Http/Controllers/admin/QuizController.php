@@ -151,6 +151,31 @@ class QuizController extends Controller
 
     } 
 
-   
+    public function show($id)
+    {
+
+        $c = Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->count();
+
+        if($c!=0)     
+         {
+           
+            
+            $quiz= Quiz::where('id','=',$id)->where('user_id','=',auth()->user()->id)->with('topTen.user','results.user','results_details.user')->first();
+           
+            //$questions1=Question::where('quiz_id',$id)->where('subject',1)->get();
+            //$questions2=Question::where('quiz_id',$id)->where('subject',2)->get(); 
+            //$questions3=Question::where('quiz_id',$id)->where('subject',3)->get();
+    
+
+        
+        return view('admin.quiz.show',compact('quiz'));
+        
+         }
+          else{
+        
+          
+              return redirect('/dashboard');
+          }
+        }
 
 }

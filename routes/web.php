@@ -32,7 +32,7 @@ Route::group(['middleware'=>'auth'],function(){
 Route::get('/dashboard',[App\Http\Controllers\MainController::class, 'dashboard'])->name('dashboard');
 Route::get('/quiz/detay/{id}/{slug}',[App\Http\Controllers\MainController::class, 'quiz_detail'])->name('quiz.detail');
 Route::get('/answer/quiz/detay/{id}/{slug}',[App\Http\Controllers\MainController::class, 'answer_quiz_detail'])->name('answer.quiz.detail');
-Route::get('/quiz/{id}/{slug}',[App\Http\Controllers\MainController::class, 'quiz'])->name('quiz.join');
+Route::post('/quiz',[App\Http\Controllers\MainController::class, 'quiz'])->name('quiz.join');
 Route::get('/quiz/answer/{id}/{slug}',[App\Http\Controllers\MainController::class, 'quiz_answer'])->name('quiz.answer');
 Route::post('/quiz/{id}/{slug}/result',[App\Http\Controllers\MainController::class, 'result'])->name('quiz.result');
 
@@ -40,8 +40,6 @@ Route::post('/quiz/{id}/{slug}/result',[App\Http\Controllers\MainController::cla
 Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'=>['auth','isAdmin']],function(){
 
     Route::get('/', [App\Http\Controllers\admin\indexController::class,'index']);
-
-
 
     Route::group(['namespace'=>'ustimtahanlar','prefix'=>'ustimtahanlar','as'=>'ustimtahanlar.'],function (){
         Route::get('/',[App\Http\Controllers\admin\kategori\ustimtahanlar\indexController::class, 'index'])->name('index');
@@ -70,7 +68,8 @@ Route::group(['namespace'=>'admin','prefix'=>'admin','as'=>'admin.','middleware'
         Route::get('/duzenle/{id}',[App\Http\Controllers\admin\QuizController::class, 'edit'])->name('edit');
         Route::post('/duzenle/{id}',[App\Http\Controllers\admin\QuizController::class, 'update'])->name('edit.post');
         Route::get('/sil/{id}',[App\Http\Controllers\admin\QuizController::class, 'delete'])->name('delete');
-    
+        Route::get('/quizzes/{id}/details',[App\Http\Controllers\admin\QuizController::class, 'show'])->name('details');
+
         Route::group(['namespace'=>'admin','prefix'=>'sual','as'=>'sual.'],function (){
         Route::get('/{id}',[App\Http\Controllers\admin\QuestionController::class, 'index'])->name('index');
         Route::get('/ekle/{id}',[App\Http\Controllers\admin\QuestionController::class, 'create'])->name('create');

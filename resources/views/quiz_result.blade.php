@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
   
-      {{$quiz[0]['title']}} Cavabı
+      {{$quiz->title}} Cavabı
      
     </x-slot>
     
@@ -11,15 +11,16 @@
       
         <div class="card" >
   <div class="card-body">
+    <h3>Puan : <strong>{{$quiz->my_result->points}}</strong></h3> 
    <div class="alert alert-secondary">
    <i class="fa fa-times-circle text-danger" aria-hidden="true"></i> İşarətlədiyin Variant  <br>
    <i class="fa fa-check text-success" aria-hidden="true" ></i> Doğru Variant <br>
    <i class="fa fa-times text-danger" aria-hidden="true" ></i> Yanlış Cavab
 </div>
-<strong><h3 class="text-center text-primary">{{$quiz[0]['subject1']}}</h3></strong>
+<strong><h3 class="text-center text-primary">{{$quiz->subject1}}</h3></strong>
       <?php $sayi=0; ?>
      @foreach($questions1 as  $question)
-
+     
      @if($question->my_answer->answer)
      
      @if($question->correct_answer == $question->my_answer->answer)
@@ -31,7 +32,8 @@
      @endif
      <?php $sayi+=1 ;?>
      <strong># <?php echo $sayi; // {{$loop->iteration}}?></strong> {{$question->question}}
-
+     <br>
+     <smal>Bu suala <strong>{{$question->true_percent}}%</strong> doğru cavab verilib. </smal>
 @if($question['image'])
 <img src="{{ asset($question['image'] )}}" style="width: 50%" class="img-responsive" ><br>
 @endif
@@ -119,18 +121,16 @@
 </div>
 
 
-   @if(!$loop->last)
-   <hr>
-   @endif
+    <hr>
    @endif
   
      @endforeach
     
   <?php //-----------------------------------------------------------------------------?>
-  <strong><h3 class="text-center text-primary">{{$quiz[0]['subject2']}}</h3></strong>
+  <strong><h3 class="text-center text-primary">{{$quiz->subject2}}</h3></strong>
   <?php $sayi=0; ?>
      @foreach($questions2 as  $question)
-
+     
      @if($question->my_answer->answer)
      
      @if($question->correct_answer == $question->my_answer->answer)
@@ -142,7 +142,8 @@
      @endif
      <?php $sayi+=1 ;?>
      <strong># <?php echo $sayi; // {{$loop->iteration}}?></strong> {{$question->question}}
-
+     <br>
+     <smal>Bu suala <strong>{{$question->true_percent}}%</strong> doğru cavab verilib. </smal>
 @if($question['image'])
 <img src="{{ asset($question['image'] )}}" style="width: 50%" class="img-responsive" ><br>
 @endif
@@ -230,9 +231,9 @@
 </div>
 
 
-   @if(!$loop->last)
+   
    <hr>
-   @endif
+   
    @endif
   
      @endforeach
@@ -241,10 +242,10 @@
 
 
      <?php //-----------------------------------------------------------------------------?>
-     <strong><h3 class="text-center text-primary">{{$quiz[0]['subject3']}}</h3></strong>
+     <strong><h3 class="text-center text-primary">{{$quiz->subject3}}</h3></strong>
     <?php $sayi=0; ?>
        @foreach($questions3 as  $question)
-  
+      
        @if($question->my_answer->answer)
        
        @if($question->correct_answer == $question->my_answer->answer)
@@ -256,7 +257,8 @@
        @endif
        <?php $sayi+=1 ;?>
        <strong># <?php echo $sayi; // {{$loop->iteration}}?></strong> {{$question->question}}
-  
+       <br>
+     <smal>Bu suala <strong>{{$question->true_percent}}%</strong> doğru cavab verilib. </smal>
   @if($question['image'])
   <img src="{{ asset($question['image'] )}}" style="width: 50%" class="img-responsive" ><br>
   @endif

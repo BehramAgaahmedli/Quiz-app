@@ -241,8 +241,9 @@
 {{--@if(!$loop->last)--}}
 <hr>
 {{--@endif--}}
- @endforeach
 
+ @endforeach
+ 
 
 
 

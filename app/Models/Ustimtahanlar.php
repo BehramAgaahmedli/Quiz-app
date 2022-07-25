@@ -9,4 +9,6 @@ class Ustimtahanlar extends Model
 {
     use HasFactory;
     protected $guarded =[];
+
+
 }

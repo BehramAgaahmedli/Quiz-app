@@ -63,13 +63,16 @@ class Quiz extends Model
 
 
 
-
+    
 
     public function results(){
 
         return $this->hasMany('App\Models\Result');
     }
+    public function results_details(){
 
+        return $this->hasMany('App\Models\Result')->orderByDesc('id');
+    }
     public function topTen()
     {
 
@@ -78,6 +81,18 @@ class Quiz extends Model
     }
    
    
+    public function alt_imtahanlar(){
+
+        return $this->hasOne('App\Models\Altimtahanlar');
+    }
+
+
+
+
+
+
+
+
     public function sluggable(): array
     {
         return [

@@ -53,9 +53,11 @@
                                     <th>Yerləşmə Tarixi</th>
                                     <th>Güncəlləmə Tarixi</th>
                                     <th>Bitiş tarixi</th>
+                                    <th><i class="fa fa-info-circle" aria-hidden="true"></i></th>
                                     <th><i class="fa fa-question" aria-hidden="true"></i></th>
                                     <th><i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                                     <th><i class="fa fa-trash-o" aria-hidden="true"></i></th>
+                                   
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -69,13 +71,21 @@
                                         <td>{{$value['description']}}</td>                                      
                                         <td>@switch($value['status'])
                                             @case('publish')
+                                            @if(!$value['finished_at'])
                                             <span class="badge badge-success">Aktiv</span>
+                                             @elseif($value['finished_at']>now())
+                                             <span class="badge badge-success">Aktiv</span>
+                                             @else
+                                             <span class="badge badge-secondary">Tarixi Dolmuş</span>
+                                             @endif
+
+                                            
                                             @break
                                             @case('draft')
                                             <span class="badge badge-success">Taslak</span>
                                             @break
                                             @case('passive')
-                                            <span class="badge badge-danger ">Passif</span>
+                                            <span class="badge badge-danger">>Passif</span>
                                             @break
                                             @endswitch
                                         </td>
@@ -150,9 +160,11 @@
                                             -
                                             @endif
                                         </td>
+                                        <td><a href="{{route('admin.quiz.details',['id'=>$value['id']])}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
                                         <td><a href="{{route('admin.quiz.sual.index',['id'=>$value['id']])}}"><i class="fa fa-question" aria-hidden="true"></i></a></td>
                                         <td><a href="{{route('admin.quiz.edit',['id'=>$value['id']])}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                                         <td><a href="{{route('admin.quiz.delete',['id'=>$value['id']])}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                       
                                     </tr>
                                 @endforeach
 
